@@ -2,9 +2,6 @@ import rclpy
 from rclpy.node import Node
 
 from std_msgs.msg import Float64
-#import sys
-#sys.path.append('/home/moonshot/dynamixel_hotplug_ros2_python/src/motor_controller/motor_controller/python_package_include/')
-#from topic_remapping import *
 from std_srvs.srv import SetBool
 
 class MinimalSubscriber(Node):
@@ -12,51 +9,23 @@ class MinimalSubscriber(Node):
     def __init__(self):
         super().__init__('module2_hamano_commander')
         
-        #Data formatting
-        
-#        self.subscription = self.create_subscription(
-#            Float64,
-#            'hm_connector_cmd',
-#            self.listener_callback,
-#            10)
-#        self.subscription  # prevent unused variable warning
-        
-        self.topic_1_ = 'ang_joint4_1_set'
-        self.topic_2_ = 'ang_joint2_2_set'
+        self.topic_1_ = 'ang_joint2_1_set'
+        self.topic_2_ = 'ang_joint1_1_set'
 
         #Publisher for 2 motors
         self.publisher_1_ = self.create_publisher(Float64, self.topic_1_ ,10)
         self.publisher_2_ = self.create_publisher(Float64, self.topic_2_, 10)
 
-        self.srv_1_ = self.create_service(SetBool, '/module2/control_gripper_1', self.handle_control_gripper_1)
-        self.srv_2_ = self.create_service(SetBool, '/module2/control_gripper_2', self.handle_control_gripper_2)
-
-#        self.transform_msg = input_shaping_map['ang_joint2_1_set']
-#        self.untransform_msg = output_shaping_map['ang_joint2_1_set']
-
-#        self.offset = offset_map['ang_joint2_1_set']
-#        self.gain = gain_map['ang_joint2_1_set']
-
-        self.CLOSE_VALUE = 1.76
-        self.OPEN_VALUE = 4.45
-
-#    def listener_callback(self, msg):
-#        new_msg = Float64()
-#        
-#        new_msg.data = self.untransform_msg(msg.data / self.gain - self.offset)
-#        self.publisher_.publish(new_msg)
-#        self.get_logger().info('Publishing: "%s"' % new_msg.data)
+        self.srv_1_ = self.create_service(SetBool, '/module3/control_gripper_1', self.handle_control_gripper_1)
+        self.srv_2_ = self.create_service(SetBool, '/module3/control_gripper_2', self.handle_control_gripper_2)
+        self.CLOSE_VALUE = 0.46
+        self.OPEN_VALUE = 2.46
 
     def handle_control_gripper_1(self, req, resp):
         """
         Callback function for the "control_gripper" service.
         """
         topic_ = self.topic_1_
-
-        #for mapping when you have more robots
-        #gain = gain_map[topic_] 
-        #offset = offset_map[topic_]
-        #untransform_msg = output_shaping_map[topic_]
 
         #Default values for now
         gain = 1
@@ -66,11 +35,9 @@ class MinimalSubscriber(Node):
         try:
             mode_value = 0.2 
             if req.data:
-                #mode_value = self.CLOSE_VALUE 
                 mode_value = self.OPEN_VALUE 
                 msg_info = 'Opening'
             else:
-                #mode_value = self.OPEN_VALUE
                 mode_value = self.CLOSE_VALUE
                 msg_info = 'Closing'
                 
@@ -101,11 +68,6 @@ class MinimalSubscriber(Node):
         """
         topic_ = self.topic_2_
 
-        #for mapping when you have more robots
-        #gain = gain_map[topic_] 
-        #offset = offset_map[topic_]
-        #untransform_msg = output_shaping_map[topic_]
-
         #Default values for now
         gain = 1
         offset = 0
@@ -114,11 +76,9 @@ class MinimalSubscriber(Node):
         try:
             mode_value = 0.2 
             if req.data:
-                #mode_value = self.CLOSE_VALUE 
                 mode_value = self.OPEN_VALUE 
                 msg_info = 'Opening'
             else:
-                #mode_value = self.OPEN_VALUE
                 mode_value = self.CLOSE_VALUE
                 msg_info = 'Closing'
                 

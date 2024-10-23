@@ -21,9 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'server_commander = hamano_dyn_commander.server_commander:main',
-            'server_multicommander = hamano_dyn_commander.hamano_multicommander:main',
-            'server_mc_test = hamano_dyn_commander.testing_hamano_mc:main',
-
+            'server_multicommander = hamano_dyn_commander.server_multicommander:main'
         ],
     },
 )
