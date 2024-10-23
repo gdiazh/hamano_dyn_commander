@@ -7,7 +7,7 @@ from std_srvs.srv import SetBool
 class MinimalSubscriber(Node):
 
     def __init__(self):
-        super().__init__('module2_hamano_commander')
+        super().__init__('module3_hamano_commander')
         
         self.topic_1_ = 'ang_joint2_1_set'
         self.topic_2_ = 'ang_joint1_1_set'
