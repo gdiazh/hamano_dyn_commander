@@ -9,7 +9,7 @@ class MinimalSubscriber(Node):
     def __init__(self):
         super().__init__('module2_hamano_commander')
         
-        self.topic_1_ = 'ang_joint4_3_set'
+        self.topic_1_ = 'ang_joint2_3_set'
         self.topic_2_ = 'ang_joint2_2_set'
 
         #Publisher for 2 motors
