@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             'server_commander = hamano_dyn_commander.server_commander:main',
             'server_multicommander_m2 = hamano_dyn_commander.server_multicommander_module2:main',
-            'server_multicommander_m3 = hamano_dyn_commander.server_multicommander_module3:main'
+            'server_multicommander_m3 = hamano_dyn_commander.server_multicommander_module3:main',
+            'client_multicommander = hamano_dyn_commander.client_multicommander:main'
         ],
     },
 )
